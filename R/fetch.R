@@ -14,7 +14,7 @@
 #'   \item{\code{\link{import_spec}}: Defines an import spec for a specific dataset}
 #' }
 #' @docType package
-#' @name fetchpackage
+#' @name fetch-package
 #' @keywords internal
 NULL
 

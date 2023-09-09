@@ -1,3 +1,9 @@
+# fetch 0.1.3
+
+* Updated alias for CRAN.
+* Added logo.
+* Small changes to documentation.
+
 # fetch 0.1.2
 
 * Added `catalog()` and `fetch()` functions.

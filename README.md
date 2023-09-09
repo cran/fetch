@@ -1,14 +1,14 @@
 <!-- badges: start -->
 
 [![fetch version](https://www.r-pkg.org/badges/version/fetch)](https://cran.r-project.org/package=fetch)
-[![fetch lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://cran.r-project.org/package=fetch)
+[![fetch lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://cran.r-project.org/package=fetch)
 [![fetch downloads](https://cranlogs.r-pkg.org/badges/fetch)](https://cran.r-project.org/package=fetch)
 [![fetch total downloads](https://cranlogs.r-pkg.org/badges/grand-total/fetch)](https://cran.r-project.org/package=fetch)
 [![R-CMD-check](https://github.com/dbosak01/fetch/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/fetch/actions)
 <!-- badges: end -->
 
 # Introduction to **fetch**
-<!--<img src="man/images/reporter_new.png" align="left" height="138px" style="margin-right:10px;height:138px"/>-->
+<img src="man/images/fetch.png" align="left" height="138px" style="margin-right:10px;height:138px"/>
 
 Many R programs require multiple input datasets.  The purpose of the 
 **fetch** package is to make it easier to access multiple datasets from

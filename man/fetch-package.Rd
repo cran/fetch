@@ -2,8 +2,8 @@
 % Please edit documentation in R/fetch.R
 \docType{package}
 \encoding{UTF-8}
-\name{fetchpackage}
-\alias{fetchpackage}
+\name{fetch-package}
+\alias{fetch-package}
 \title{Fetch data from many data sources}
 \description{
 The \strong{fetch} package allows you to retrieve data from many different
