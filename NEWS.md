@@ -1,3 +1,7 @@
+# fetch 0.1.4
+
+* Update description.
+
 # fetch 0.1.3
 
 * Updated alias for CRAN.
