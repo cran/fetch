@@ -105,8 +105,13 @@ exec_spec <- function(x, spcs, tnm) {
       }
       
       for (atnm in names(attributes(x[[nm]]))) {
-        if (atnm != "class")
+        if (atnm != "class") {
           attr(ret[[nm]], atnm) <- attr(x[[nm]], atnm)
+        }  else {
+          if (is.null(colspcs[[nm]])) {
+            attr(ret[[nm]], atnm) <- attr(x[[nm]], atnm)
+          }
+        }
         
       }
     }

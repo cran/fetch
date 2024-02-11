@@ -1,3 +1,7 @@
+# fetch 0.1.5
+* Bug fix for sas7bdat where Date class was being stripped.
+* Bug fix for labels being stripped after where clause.
+
 # fetch 0.1.4
 
 * Update description.

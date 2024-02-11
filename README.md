@@ -4,7 +4,7 @@
 [![fetch lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://cran.r-project.org/package=fetch)
 [![fetch downloads](https://cranlogs.r-pkg.org/badges/fetch)](https://cran.r-project.org/package=fetch)
 [![fetch total downloads](https://cranlogs.r-pkg.org/badges/grand-total/fetch)](https://cran.r-project.org/package=fetch)
-[![R-CMD-check](https://github.com/dbosak01/fetch/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/fetch/actions)
+[![R-CMD-check](https://github.com/dbosak01/fetch/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dbosak01/fetch/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 # Introduction to **fetch**

@@ -13,10 +13,10 @@
 #'   \item{\code{\link{fetch}}: Creates a data dictionary}
 #'   \item{\code{\link{import_spec}}: Defines an import spec for a specific dataset}
 #' }
-#' @docType package
-#' @name fetch-package
+#' @name fetch
+#' @aliases fetch-package
 #' @keywords internal
-NULL
+"_PACKAGE"
 
 
 

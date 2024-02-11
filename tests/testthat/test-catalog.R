@@ -170,7 +170,7 @@ test_that("catalog6: catalog() function works with import spec on sas7bdat", {
   d <- res$demo_studya
   
   expect_equal(d[d$Column == "visit", "Class"], "numeric")
-  expect_equal(d[d$Column == "screendate", "Class"], "numeric")
+  expect_equal(d[d$Column == "screendate", "Class"], "Date")
   
   
   res <- catalog(base_path, engines$sas7bdat, import_specs = spc)

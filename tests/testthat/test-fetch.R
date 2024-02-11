@@ -467,8 +467,8 @@ test_that("fetch15: fetch() function works with import spec on sas7bdat", {
   
   expect_equal(d[d$Column == "patient", "Class"], "numeric")
   expect_equal(d[d$Column == "visit", "Class"], "numeric")
-  expect_equal(d[d$Column == "screendate", "Class"], "numeric")
-  expect_equal(d[d$Column == "dob", "Class"], "numeric")
+  expect_equal(d[d$Column == "screendate", "Class"], "Date")
+  expect_equal(d[d$Column == "dob", "Class"], "Date")
   
   
   dt <- fetch(d, import_specs = spc)
@@ -654,3 +654,39 @@ test_that("fetch21: fetch() function invalid select parameter", {
   expect_error(fetch(res$demo_studya, select = 1:25))
   
 })
+
+
+test_that("fetch22: sas7bdat dates are retained", {
+  
+  res <- catalog(base_path, engines$sas7bdat)
+  
+  dat <- fetch(res$demo_studyb)
+  
+  cls <- class(dat$dob)
+  expect_equal("Date" %in% cls, TRUE)
+  
+})
+
+
+test_that("fetch23: labels on data are retained after where clause", {
+  
+  res <- catalog(base_path, engines$sas7bdat, 
+                 where = expression(sex == 'F'))
+  
+  dat <- fetch(res$demo_studya)
+  
+  lbl1 <- labels(dat)
+  expect_equal(length(lbl1) > 0, TRUE)
+  
+  res2 <- catalog(base_path, engines$sas7bdat)
+  
+  dat2 <- fetch(res$demo_studya, 
+                where = expression(sex == 'F'))
+  
+  lbl2 <- labels(dat2)
+  
+  expect_equal(length(lbl2) > 0, TRUE)
+  
+  
+})
+

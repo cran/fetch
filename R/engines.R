@@ -202,19 +202,27 @@ get_dinfo_xls <- function(fp, nm, where = NULL, top = NULL,
 
 # Get data --------------------------------------------------------------
 
-
+#' @import common
 get_data_rds <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   dat <- read_rds(fp)
   
+  
   if (!is.null(import_specs))
     dat <- exec_spec(dat, import_specs, nm) 
+  
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
   
   if (!is.null(where)) {
 
     dat <- tryCatch({subset(dat, eval(where))},
                      error = function(cond){dat}) 
-    
   }
   
   if (!is.null(top)) {
@@ -223,11 +231,14 @@ get_data_rds <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     
   }
 
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
   
   return(dat)
 }
 
-
+#' @import common
 get_data_rda <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   # Create new environment
@@ -242,6 +253,14 @@ get_data_rda <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
   if (!is.null(import_specs))
     dat <- exec_spec(dat, import_specs, nm) 
   
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
+  
   if (!is.null(where)) {
     
     dat <- tryCatch({subset(dat, eval(where))},
@@ -254,11 +273,16 @@ get_data_rda <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
       dat <- dat[seq(1, top), ]
     
   }
+  
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
 
   return(dat)
 }
 
 #' @import readr
+#' @import common
 get_data_csv <- function(fp, nm, where = NULL, top = NULL, 
                           import_specs = NULL) {
   
@@ -329,6 +353,14 @@ get_data_csv <- function(fp, nm, where = NULL, top = NULL,
   }
   
   
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
+  
   if (!is.null(where)) {
     
     dat <- tryCatch({subset(dat, eval(where))},
@@ -342,12 +374,17 @@ get_data_csv <- function(fp, nm, where = NULL, top = NULL,
     
   }
   
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
+  
   
   return(dat)
 }
 
 
 #' @import haven
+#' @import common
 get_data_sas7bdat <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   if (!is.null(top) & is.null(where)) {
@@ -360,6 +397,7 @@ get_data_sas7bdat <- function(fp, nm, where = NULL, top = NULL, import_specs = N
   
   }
   
+
   if (!is.null(import_specs))
     dat <- exec_spec(dat, import_specs, nm)
   else {
@@ -367,6 +405,14 @@ get_data_sas7bdat <- function(fp, nm, where = NULL, top = NULL, import_specs = N
     dat <- exec_spec(dat, spcs, nm)
     
   } 
+  
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
   
   if (!is.null(where)) {
     
@@ -381,10 +427,15 @@ get_data_sas7bdat <- function(fp, nm, where = NULL, top = NULL, import_specs = N
     
   }
   
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
+  
   return(dat)
 }
 
 #' @import foreign
+#' @import common
 get_data_dbf <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   
@@ -394,6 +445,14 @@ get_data_dbf <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
   
   if (!is.null(import_specs))
     dat <- exec_spec(dat, import_specs, nm) 
+  
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
   
   if (!is.null(where)) {
     
@@ -408,12 +467,17 @@ get_data_dbf <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     
   }
   
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
+  
   
   return(dat)
   
 }
 
 #' @import haven
+#' @import common
 get_data_xpt <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   if (!is.null(top) & is.null(where)) {
@@ -433,6 +497,14 @@ get_data_xpt <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     
   } 
   
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
+  
   if (!is.null(where)) {
     
     dat <- tryCatch({subset(dat, eval(where))},
@@ -446,10 +518,15 @@ get_data_xpt <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     
   }
   
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
+  
   return(dat)
 }
 
 #' @import readxl
+#' @import common
 get_data_xlsx <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   
@@ -469,9 +546,10 @@ get_data_xlsx <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL)
       tspec <- import_specs 
     }
     
-    if (is.null(tspec))
+    if (is.null(tspec)) {
       dat <- read_xlsx(fp)
-    else {
+      
+    } else {
       
       typs <- tspec$col_types
       tmp <- read_xlsx(fp,
@@ -509,14 +587,19 @@ get_data_xlsx <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL)
         
       }
     }
-    
-
-    
   }
   
   if (!is.null(dat)) {
     
     dat <- exec_spec(dat, import_specs, nm) 
+  }
+  
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
   }
   
   if (!is.null(where)) {
@@ -532,11 +615,16 @@ get_data_xlsx <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL)
     
   }
   
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
+  }
+  
   return(dat)
   
 }
 
 #' @import readxl
+#' @import common
 get_data_xls <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) {
   
   
@@ -557,9 +645,10 @@ get_data_xls <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
       tspec <- import_specs 
     }
     
-    if (is.null(tspec))
+    if (is.null(tspec)) {
       dat <- read_xls(fp)
-    else {
+      
+    } else {
 
       typs <- tspec$col_types
       tmp <- read_xls(fp,
@@ -605,6 +694,14 @@ get_data_xls <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     dat <- exec_spec(dat, import_specs, nm) 
   }
   
+  if (nrow(dat) > 0) {
+    
+    bdat <- dat[1, ]
+  } else {
+    
+    bdat <- dat 
+  }
+  
   if (!is.null(where)) {
     
     dat <- tryCatch({subset(dat, eval(where))},
@@ -616,6 +713,10 @@ get_data_xls <- function(fp, nm, where = NULL, top = NULL, import_specs = NULL) 
     if (nrow(dat) > top)
       dat <- dat[seq(1, top), ]
     
+  }
+  
+  if (!is.null(bdat) & !is.null(dat)) {
+    dat <- copy.attributes(bdat, dat)
   }
   
   return(dat)
